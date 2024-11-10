@@ -1,4 +1,5 @@
 import React from 'react'
+import Script from 'next/script'
 import Navbar from '@/components/Navbar'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -29,6 +30,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-V4PMNM5WS7"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-V4PMNM5WS7');
+          `}
+        </Script>
+      </head>
       <body className={inter.className}>
         <Navbar />
         {children}
