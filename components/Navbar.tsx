@@ -11,17 +11,26 @@ const Navbar = () => {
         </Link>
         
         <div className={styles.navLinks}>
-          <Link href="/" className={styles.navLink}>
+          <Link href="#hero" className={styles.navLink}>
             Home
           </Link>
-          <Link href="/sprunkgame" className={styles.navLink}>
-            SprunkGame
+          <Link href="#features" className={styles.navLink}>
+            Features
           </Link>
-          <Link href="/about" className={styles.navLink}>
+          <Link href="#about" className={styles.navLink}>
             About
           </Link>
-          <Link href="/contact" className={styles.navLink}>
-            Contact
+          <Link href="#gameplay" className={styles.navLink}>
+            How to Play
+          </Link>
+          <Link href="#phases" className={styles.navLink}>
+            Phases
+          </Link>
+          <Link href="#community" className={styles.navLink}>
+            Community
+          </Link>
+          <Link href="#faq" className={styles.navLink}>
+            FAQ
           </Link>
         </div>
       </div>

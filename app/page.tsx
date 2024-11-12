@@ -4,124 +4,242 @@ import styles from './page.module.css';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const gameWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsMounted(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    if (isMounted) {
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
-      return () => clearTimeout(timer);
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      if (gameWrapperRef.current?.requestFullscreen) {
+        gameWrapperRef.current.requestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
     }
-  }, [isMounted]);
+  };
 
-  if (!isMounted) {
-    return null; // 或者返回一个加载占位符
-  }
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isFullscreen) {
+        setIsFullscreen(false);
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('keydown', handleEscKey);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isFullscreen]);
 
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <section className={styles.hero}>
-          <h1 className={styles.title}>Welcome to Sprunke Retake </h1>
-          <p className={styles.description}>
-              Online experience of a horror-themed music creation adventure playground
-          </p>
-        </section>
-
-        <section className={styles.gameSection}>
-          {isLoading ? (
-            <div className={styles.loadingWrapper}>
-              <div className={styles.loadingSpinner}></div>
-              <p>Loading game...</p>
-            </div>
-          ) : (
-            <div 
-              ref={wrapperRef} 
-              className={styles.gameWrapper}
-              onClick={(e) => {
-                if (iframeRef.current) {
-                  iframeRef.current.focus();
-                }
-              }}
-            >
-              <iframe 
-                ref={iframeRef}
-                src="https://playminigames.net/embed/sprunki-retake"
-                className={styles.gameFrame}
-                frameBorder="0"
-                scrolling="no"
-                allowFullScreen
-                allow="autoplay"
-                title="Sprunki Retake"
-              ></iframe>
-            </div>
-          )}
-        </section>
-        
-        <section className={styles.gameInfo}>
-          <div className={styles.infoCard}>
-            <h2>What is SprunkiRetake?</h2>
-            <p>
-              SprunkiRetake is an innovative horror-themed music creation adventure playground 
-              that combines the thrill of horror elements with creative music making. Players 
-              explore a mysterious world while creating unique musical compositions through 
-              various interactive elements and challenges.
+    <>
+      <main className={styles.main}>
+        <div className={styles.container}>
+          {/* Hero Section */}
+          <section id="hero" className={styles.hero}>
+            <h1>Welcome to Sprunki Retake</h1>
+            <p className={styles.subtitle}>
+              Experience the Ultimate Horror-Themed Music Creation Adventure
             </p>
-            <ul>
-              <li>Immersive horror atmosphere</li>
-              <li>Creative music composition</li>
-              <li>Interactive gameplay elements</li>
-              <li>Unique sound design</li>
-            </ul>
-          </div>
-        </section>
+          </section>
 
-        <section className={styles.howToPlaySection}>
-          <div className={styles.infoCard}>
-            <h2>How to Play Sprunki Retake</h2>
-            <div className={styles.howToPlay}>
+          {/* Game Section */}
+          <section id="game" className={styles.gameSection}>
+            {isLoading ? (
+              <div className={styles.loadingWrapper}>
+                <div className={styles.loadingSpinner}></div>
+                <p>Loading your musical adventure...</p>
+              </div>
+            ) : (
+              <div className={styles.gameContainer}>
+                <div ref={gameWrapperRef} className={styles.gameWrapper}>
+                  <iframe 
+                    src="https://scratch.mit.edu/projects/1090434936/embed"
+                    className={styles.gameFrame}
+                    frameBorder="0"
+                    scrolling="no"
+                    allowFullScreen
+                    title="Sprunki Retake Game"
+                  ></iframe>
+                </div>
+                <button onClick={toggleFullscreen} className={styles.fullscreenButton}>
+                  {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+                </button>
+              </div>
+            )}
+          </section>
+
+          {/* Features Section */}
+          <section id="features" className={styles.features}>
+            <h2>Key Features</h2>
+            <div className={styles.featureGrid}>
+              <div className={styles.featureCard}>
+                <h3>Music Creation</h3>
+                <p>Create unique musical compositions through interactive gameplay</p>
+              </div>
+              <div className={styles.featureCard}>
+                <h3>Horror Theme</h3>
+                <p>Experience chilling atmospheres with ghostly characters</p>
+              </div>
+              <div className={styles.featureCard}>
+                <h3>Adventure</h3>
+                <p>Explore mysterious worlds while crafting your musical journey</p>
+              </div>
+              <div className={styles.featureCard}>
+                <h3>Community</h3>
+                <p>Share your creations with the global Sprunki Retake community</p>
+              </div>
+            </div>
+          </section>
+
+          {/* About Section */}
+          <section id="about" className={styles.about}>
+            <h2>What is Sprunki Retake?</h2>
+            <div className={styles.aboutContent}>
+              <p>
+                Sprunki Retake is a groundbreaking fan-made adaptation of the popular 
+                music-mixing game Incredibox. This unique horror-themed music creation 
+                adventure combines the thrill of horror elements with creative music making, 
+                offering players an immersive experience in a haunting yet creative environment.
+              </p>
+              <div className={styles.aboutFeatures}>
+                <ul>
+                  <li>Immersive horror atmosphere</li>
+                  <li>Creative music composition</li>
+                  <li>Interactive gameplay elements</li>
+                  <li>Unique sound design</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* Gameplay Section */}
+          <section id="gameplay" className={styles.gameplay}>
+            <h2>How to Play</h2>
+            <div className={styles.steps}>
               <div className={styles.step}>
-                <h3>1. Explore</h3>
-                <p>Navigate through the eerie environment using WASD or arrow keys</p>
+                <h3>1. Choose Characters</h3>
+                <p>Select from various characters, each representing unique sounds and abilities</p>
               </div>
               <div className={styles.step}>
-                <h3>2. Create Music</h3>
-                <p>Interact with objects using your mouse to create musical elements</p>
+                <h3>2. Mix Sounds</h3>
+                <p>Combine different character sounds to create layered musical compositions</p>
               </div>
               <div className={styles.step}>
-                <h3>3. Solve Puzzles</h3>
-                <p>Combine music and horror elements to progress through challenges</p>
+                <h3>3. Explore</h3>
+                <p>Navigate through levels, discover hidden paths, and face unique challenges</p>
               </div>
               <div className={styles.step}>
                 <h3>4. Share</h3>
-                <p>Record and share your unique musical creations with other players</p>
+                <p>Save your creations and share them with the Sprunki Retake community</p>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className={styles.features}>
-          <div className={styles.featureCard}>
-            <h2>Play Now</h2>
-            <p>Jump into the action instantly</p>
+          {/* Phases Section */}
+          <section id="phases" className={styles.phases}>
+            <h2>Game Phases</h2>
+            <div className={styles.phaseGrid}>
+              <div className={styles.phase}>
+                <h3>Phase 3</h3>
+                <p>Classic sound variations with unique Sprunki style</p>
+              </div>
+              <div className={styles.phase}>
+                <h3>Phase 4</h3>
+                <p>Thematic effects for complex compositions</p>
+              </div>
+              <div className={styles.phase}>
+                <h3>Phase 5</h3>
+                <p>Darker tones with infected Sprunki characters</p>
+              </div>
+              <div className={styles.phase}>
+                <h3>Phase 6</h3>
+                <p>Futuristic sound effects with upgraded features</p>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ Section */}
+          <section id="faq" className={styles.faq}>
+            <h2>Frequently Asked Questions</h2>
+            <div className={styles.faqItem}>
+              <h3>What is Sprunki Retake?</h3>
+              <p>Sprunki Retake is a fan-made adaptation of the popular music-mixing game Incredibox, offering a unique blend of music creation and adventure gameplay.</p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3>How do I play the game?</h3>
+              <p>Players can create musical compositions by choosing characters, mixing sounds, exploring levels, and sharing their creations with the community.</p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3>Is Sprunki Retake free to play?</h3>
+              <p>Yes, Sprunki Retake is free to play and accessible online through your web browser.</p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3>Can I share my creations?</h3>
+              <p>Absolutely! You can save and share your musical creations with the global Sprunki Retake community.</p>
+            </div>
+          </section>
+
+          {/* Community Section */}
+          <section id="community" className={styles.community}>
+            <h2>Join the Community</h2>
+            <div className={styles.communityContent}>
+              <p>
+                Connect with fellow creators, share your musical masterpieces, and discover 
+                new techniques in the Sprunki Retake community. Your journey in musical 
+                horror creation starts here.
+              </p>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      {/* Footer Section */}
+      <footer className={styles.footer}>
+        <div className={styles.footerContent}>
+          <div className={styles.footerSection}>
+            <h3>Sprunki Retake</h3>
+            <p>A horror-themed music creation adventure game that combines creative composition with immersive gameplay.</p>
           </div>
-          <div className={styles.featureCard}>
-            <h2>Leaderboard</h2>
-            <p>Compete with players worldwide</p>
+          <div className={styles.footerSection}>
+            <h3>Quick Links</h3>
+            <div className={styles.footerLinks}>
+              <a href="#features">Features</a>
+              <a href="#about">About</a>
+              <a href="#gameplay">How to Play</a>
+              <a href="#phases">Phases</a>
+            </div>
           </div>
-          <div className={styles.featureCard}>
-            <h2>Updates</h2>
-            <p>Latest game features and news</p>
+          <div className={styles.footerSection}>
+            <h3>Legal</h3>
+            <div className={styles.footerLinks}>
+              <a href="#privacy">Privacy Policy</a>
+              <a href="#terms">Terms of Use</a>
+            </div>
           </div>
-        </section>
-      </div>
-    </main>
+        </div>
+        <div className={styles.footerBottom}>
+          <p>&copy; 2024 Sprunki Retake. All rights reserved.</p>
+        </div>
+      </footer>
+    </>
   );
 } 
