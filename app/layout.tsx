@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     'Sprunki retake',
     'music game',
   ],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     title: 'Sprunkiretake - Horror Music Creation Adventure',
     description: 'Create unique musical compositions in a horror-themed adventure playground',
