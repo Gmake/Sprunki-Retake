@@ -17,14 +17,9 @@ export const metadata: Metadata = {
     'sprunki game',
   ],
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/image/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/image/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/image/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/image/apple-touch-icon.png',
   },
   openGraph: {
     title: 'Sprunkiretake - Horror Music Creation Adventure',
