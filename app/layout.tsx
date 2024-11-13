@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Sprunkiretake：horror-themed music creation adventure game｜sprunki-retake.cc',
-  description: 'Experience a unique horror-themed music creation adventure playground. Create, explore, and share your musical journey in an immersive horror environment.',
+  description: 'Play Sprunki Retake Online For Free. Experience a unique horror-themed music creation adventure playground. Create, explore, and share your musical journey in an immersive horror environment.',
   keywords: [
     'Sprunki retake',
     'music game',
