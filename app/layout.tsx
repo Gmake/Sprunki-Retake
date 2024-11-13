@@ -23,7 +23,7 @@ export const metadata: Metadata = {
       { url: '/image/icon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/image/apple-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
