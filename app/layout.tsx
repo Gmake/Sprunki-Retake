@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
     apple: '/image/apple-touch-icon.png',
   },
+   manifest: '/site.webmanifest',
   openGraph: {
     title: 'Sprunkiretake - Horror Music Creation Adventure',
     description: 'Create unique musical compositions in a horror-themed adventure playground',
