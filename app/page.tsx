@@ -89,7 +89,7 @@ export default function Home() {
 
           {/* Features Section */}
           <section id="features" className={styles.features}>
-            <h2>Key Features</h2>
+            <h2>Sprunki Retake Key Features</h2>
             <div className={styles.featureGrid}>
               <div className={styles.featureCard}>
                 <h3>Music Creation</h3>
@@ -133,7 +133,7 @@ export default function Home() {
 
           {/* Gameplay Section */}
           <section id="gameplay" className={styles.gameplay}>
-            <h2>How to Play</h2>
+            <h2>How to Play Sprunki Retake</h2>
             <div className={styles.steps}>
               <div className={styles.step}>
                 <h3>1. Choose Characters</h3>
@@ -156,7 +156,7 @@ export default function Home() {
 
           {/* Phases Section */}
           <section id="phases" className={styles.phases}>
-            <h2>Game Phases</h2>
+            <h2>Sprunki Retake Game Phases</h2>
             <div className={styles.phaseGrid}>
               <div className={styles.phase}>
                 <h3>Phase 3</h3>
