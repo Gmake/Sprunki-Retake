@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://sprunki-retake.cc/sitemap.xml 

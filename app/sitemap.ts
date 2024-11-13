@@ -1,17 +1,19 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = 'https://sprunki-retake.cc'
+  
   return [
     {
-      url: 'https://sprunki-retake.cc',
+      url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: 'https://sprunki-retake.cc/game',
+      url: `${baseUrl}/game`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'daily',
       priority: 0.8,
     },
   ]
