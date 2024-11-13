@@ -8,20 +8,28 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://sprunki-retake.cc'),
   title: 'Sprunkiretake：horror-themed music creation adventure game｜sprunki-retake.cc',
-  description: 'Play Sprunki Retake Online For Free. Experience a unique horror-themed music creation adventure playground. Create, explore, and share your musical journey in an immersive horror environment.',
+  description: 'Play Sprunki Retake Online For Free.Experience a unique horror-themed music creation adventure playground. Create, explore, and share your musical journey in an immersive horror environment.',
   keywords: [
     'Sprunki retake',
     'music game',
     'horror game',
     'sprunki game',
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
     apple: '/image/apple-touch-icon.png',
   },
-   manifest: '/site.webmanifest',
   openGraph: {
     title: 'Sprunkiretake - Horror Music Creation Adventure',
     description: 'Create unique musical compositions in a horror-themed adventure playground',
@@ -32,6 +40,26 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://sprunki-retake.cc'
   }
+}
+
+export const redirects = () => {
+  return [
+    {
+      source: '/home',
+      destination: '/',
+      permanent: true,
+    },
+    {
+      source: '/index',
+      destination: '/',
+      permanent: true,
+    },
+    {
+      source: '/:path+/',
+      destination: '/:path+',
+      permanent: true,
+    }
+  ]
 }
 
 export default function RootLayout({

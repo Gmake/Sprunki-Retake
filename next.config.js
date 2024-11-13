@@ -1,15 +1,40 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  // 添加跨域支持
+  async redirects() {
+    return [
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/index',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/:path+/',
+        has: [
+          {
+            type: 'host',
+            value: 'sprunki-retake.cc',
+          },
+        ],
+        destination: 'https://sprunki-retake.cc/:path+',
+        permanent: true,
+      }
+    ]
+  },
   async headers() {
     return [
       {
         source: '/:path*',
         headers: [
-          { key: 'Access-Control-Allow-Origin', value: '*' }
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'X-Robots-Tag', value: 'index, follow' }
         ],
-      },
+      }
     ]
   }
 }
