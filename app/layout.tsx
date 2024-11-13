@@ -13,11 +13,18 @@ export const metadata: Metadata = {
   keywords: [
     'Sprunki retake',
     'music game',
+    'horror game',
+    'sprunki game',
   ],
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/image/icon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/image/icon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   openGraph: {
     title: 'Sprunkiretake - Horror Music Creation Adventure',
