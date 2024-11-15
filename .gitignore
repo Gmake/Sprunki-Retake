@@ -9,13 +9,15 @@ node_modules/
 # Next.js
 .next/
 out/
+.next/server/
+.next/static/
+.next/cache/
 
 # Production
 /build/
+/dist/
 
-# Misc
-.DS_Store
-*.pem
+# Environment Variables
 .env
 .env.local
 .env.development.local
@@ -31,5 +33,19 @@ yarn-error.log*
 .idea/
 .vscode/
 
+# System Files
+.DS_Store
+*.pem
+Thumbs.db
+
 # Cache
 .cache/
+.vercel/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# PWA
+public/sw.js
+public/workbox-*.js
